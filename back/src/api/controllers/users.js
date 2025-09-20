@@ -29,7 +29,9 @@ const postUser = async (req, res, next) => {
 
     const userSaved = await newUser.save();
 
-    return res.status(201).json(userSaved);
+    const token = generateKey(userSaved._id);
+
+    return res.status(201).json({ user: userSaved, token });
   } catch (error) {
     return res.status(400).json("Error en el registro, por favor, inténtelo de nuevo. Si el problema persiste, contacte con un administrador.");
   }
