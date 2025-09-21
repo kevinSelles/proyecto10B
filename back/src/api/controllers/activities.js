@@ -4,7 +4,7 @@ const Activity = require("../models/activities");
 const getActivities = async (req, res, next) => {
   try {
     const activities = await Activity.find()
-    .populate("users");
+    .populate("users", "_id");
     return res.status(200).json(activities);
   } catch (error) {
     return res.status(400).json("Error al mostrar las actividades, inténtelo de nuevo.");

@@ -12,6 +12,22 @@ const getUsers = async (req, res, next) => {
   }
 }
 
+const getUserById = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json("Usuario no encontrado");
+
+    res.json({
+      _id: user._id,
+      rol: user.rol,
+      userName: user.userName,
+      email: user.email
+    });
+  } catch (error) {
+    res.status(500).json("Error al obtener usuario");
+  }
+};
+
 const postUser = async (req, res, next) => {
   try {
     const newUser = new User(req.body);
@@ -114,4 +130,4 @@ const getUserActivities = async (req, res, next) => {
   }
 };
 
-module.exports = { getUsers, postUser, login, deleteUser, putUser, getUserActivities };
+module.exports = { getUsers, getUserById, postUser, login, deleteUser, putUser, getUserActivities };
