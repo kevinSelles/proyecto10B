@@ -4,7 +4,7 @@ const Activity = require("../models/activities");
 const getActivities = async (req, res, next) => {
   try {
     const activities = await Activity.find()
-    .populate("users", "_id");
+    .populate("users", "_id userName");
     return res.status(200).json(activities);
   } catch (error) {
     return res.status(400).json("Error al mostrar las actividades, inténtelo de nuevo.");
@@ -15,7 +15,7 @@ const getActivityById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const activity = await Activity.findById(id)
-    .populate("users");
+    .populate("users", "userName");
     return res.status(200).json(activity);
   } catch (error) {
     return res.status(400).json("Error al buscar la actividad, inténtelo de nuevo.");
@@ -26,7 +26,7 @@ const getActivitiesByTitle = async (req, res, next) => {
   try {
     const { title } = req.params;
     const activities = await Activity.find({ title: { $regex: title, $options: "i" } })
-    .populate("users");
+    .populate("users", "userName");
 
      if (!activities.length) {
       return res.status(404).json("No encuentro actividades con ese nombre, pruebe con una palabra más genérica.");
