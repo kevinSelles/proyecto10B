@@ -14,10 +14,21 @@ const app = express();
 
 const FRONT_URL = process.env.FRONT_URL || "http://localhost:5173";
 
-app.use(cors({
-  origin: FRONT_URL,
-  credentials: true
-}));
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || origin === FRONT_URL) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+};
+
+app.use(cors(corsOptions));
+
+app.options("*", cors(corsOptions));
 
 app.use(express.json());
 
