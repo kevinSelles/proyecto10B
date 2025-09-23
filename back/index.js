@@ -10,8 +10,10 @@ require("./src/config/cloudinary");
 
 const app = express();
 
+const FRONT_URL = process.env.FRONT_URL || "http://localhost:5173";
+
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: FRONT_URL,
   credentials: true
 }));
 
@@ -26,8 +28,7 @@ app.use("/api/v1/contact", contactRouter);
 
 app.use((req, res, next) => {
   return res.status(404).json("Ruta no encontrada");
-})
+});
 
-app.listen(3000, () => {
-  console.log("Servidor iniciado en http://localhost:3000");
-})
+module.exports = app;
+module.exports.handler = serverless(app);
