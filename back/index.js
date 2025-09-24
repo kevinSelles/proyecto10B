@@ -19,7 +19,7 @@ app.use(express.json());
 
 connectDB();
 
-app.get("api/v1/activities", activitiesRouter);
+app.use("api/v1/activities", activitiesRouter);
 app.use("api/v1/users", usersRouter);
 app.use("api/v1/gallery", galleryRouter);
 app.use("api/v1/contact", contactRouter);
