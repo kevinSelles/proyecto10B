@@ -12,7 +12,7 @@ require("../src/config/cloudinary");
 
 const app = express();
 
-const FRONT_URL = "https://splish-splash-cadiz.vercel.app" || "http://localhost:5173";
+const FRONT_URL = "https://splish-splash-cadiz.vercel.app";
 
 app.use(cors({
   origin: FRONT_URL,
@@ -23,10 +23,10 @@ app.use(express.json());
 
 connectDB();
 
-app.use("/api/v1/activities", activitiesRouter);
-app.use("/api/v1/users", usersRouter);
-app.use("/api/v1/gallery", galleryRouter);
-app.use("/api/v1/contact", contactRouter);
+app.use("/v1/activities", activitiesRouter);
+app.use("/v1/users", usersRouter);
+app.use("/v1/gallery", galleryRouter);
+app.use("/v1/contact", contactRouter);
 
 app.use((req, res, next) => {
   return res.status(404).json("Ruta no encontrada");
