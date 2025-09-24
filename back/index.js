@@ -19,10 +19,10 @@ app.use(express.json());
 
 connectDB();
 
-app.use("api/v1/activities", activitiesRouter);
-app.use("api/v1/users", usersRouter);
-app.use("api/v1/gallery", galleryRouter);
-app.use("api/v1/contact", contactRouter);
+app.use("/api/v1/activities", activitiesRouter);
+app.use("/api/v1/users", usersRouter);
+app.use("/api/v1/gallery", galleryRouter);
+app.use("/api/v1/contact", contactRouter);
 
 app.use((req, res, next) => {
   return res.status(404).json("Ruta no encontrada");
