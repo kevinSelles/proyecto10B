@@ -32,4 +32,4 @@ app.use((req, res, next) => {
   return res.status(404).json("Ruta no encontrada");
 });
 
-module.exports.handler = serverless(app);
+module.exports = serverless(app);
