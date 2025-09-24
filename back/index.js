@@ -11,6 +11,8 @@ require("./src/config/cloudinary");
 
 const app = express();
 
+const port = process.env.PORT || 3000;
+
 app.use(cors());
 
 app.use(express.json());
@@ -24,4 +26,8 @@ app.use("api/v1/contact", contactRouter);
 
 app.use((req, res, next) => {
   return res.status(404).json("Ruta no encontrada");
+});
+
+app.listen(port, () => {
+  console.log("Escuchando en http://localhost:3000");
 });
