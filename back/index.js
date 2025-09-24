@@ -11,12 +11,7 @@ require("./src/config/cloudinary");
 
 const app = express();
 
-const FRONT_URL = "https://splish-splash-cadiz.vercel.app";
-
-app.use(cors({
-  origin: FRONT_URL,
-  credentials: true
-}));
+app.use(cors());
 
 app.use(express.json());
 
