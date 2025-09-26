@@ -7,7 +7,8 @@ const getActivities = async (req, res, next) => {
     .populate("users", "_id userName");
     return res.status(200).json(activities);
   } catch (error) {
-    return res.status(400).json("Error al mostrar las actividades, inténtelo de nuevo.");
+    console.error("Error en getActivities:", error);
+    return res.status(500).json({ message: "Error al mostrar las actividades", error: error.message });
   }
 };
 
