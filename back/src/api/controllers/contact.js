@@ -22,7 +22,7 @@ const sendContact = async (req, res) => {
     res.json({ message: "Correo enviado correctamente" });
   } catch (error) {
     console.error("Error enviando correo:", error);
-    res.status(500).json({ error: "No se pudo enviar el correo" });
+    res.status(500).json({ message: "No se pudo enviar el correo", error: error.message });
   }
 };
 

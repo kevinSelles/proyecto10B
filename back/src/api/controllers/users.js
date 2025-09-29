@@ -24,7 +24,7 @@ const getUserById = async (req, res) => {
       email: user.email
     });
   } catch (error) {
-    res.status(500).json("Error al obtener usuario");
+    res.status(500).json({message: "Error al obtener usuario", error: error.message});
   }
 };
 
@@ -49,7 +49,7 @@ const postUser = async (req, res, next) => {
 
     return res.status(201).json({ user: userSaved, token });
   } catch (error) {
-    return res.status(400).json("Error en el registro, por favor, inténtelo de nuevo. Si el problema persiste, contacte con un administrador.");
+    return res.status(400).json({message: "Error en el registro, por favor, inténtelo de nuevo. Si el problema persiste, contacte con un administrador.", error: error.message});
   }
 }
 
@@ -67,7 +67,7 @@ const login = async (req, res, next) => {
       return res.status(400).json("Contraseña incorrecta.");
     };
   } catch (error) {
-    return res.status(400).json("Error de carga en el login. Inténtelo de nuevo, si el problema persiste, contacte con un administrador.",);
+    return res.status(400).json({message: "Error de carga en el login. Inténtelo de nuevo, si el problema persiste, contacte con un administrador.", error: error.message});
   
   };
 };
@@ -90,7 +90,7 @@ const putUser = async (req, res, next) => {
     const userUpdated = await User.findByIdAndUpdate(id, { $set: req.body }, {new: true,});
     return res.status(200).json(userUpdated);
   } catch (error) {
-    return res.status(400).json("Error al actualizar los datos, inténtelo de nuevo, si el problema persiste, contacte con un administrador.");
+    return res.status(400).json({message: "Error al actualizar los datos, inténtelo de nuevo, si el problema persiste, contacte con un administrador.", error: error.message});
   }
 };
 
@@ -105,7 +105,7 @@ const deleteUser = async (req, res, next) => {
     const userDeleted = await User.findByIdAndDelete(id);
     return res.status(200).json(userDeleted);
   } catch (error) {
-    return res.status(400).json("Error al eliminar usuario. Inténtelo de nuevo, si el problema persiste, contacte con un administrador.");
+    return res.status(400).json({message: "Error al eliminar usuario. Inténtelo de nuevo, si el problema persiste, contacte con un administrador.", error: error.message});
   }
 }
 
@@ -126,7 +126,7 @@ const getUserActivities = async (req, res, next) => {
 
     return res.status(200).json(activities);
   } catch (error) {
-    return res.status(400).json("Error al obtener actividades del usuario.");
+    return res.status(400).json({message: "Error al obtener actividades del usuario.", error: error.message});
   }
 };
 

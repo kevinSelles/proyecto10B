@@ -19,7 +19,8 @@ const getActivityById = async (req, res, next) => {
     .populate("users", "userName");
     return res.status(200).json(activity);
   } catch (error) {
-    return res.status(400).json("Error al buscar la actividad, inténtelo de nuevo.");
+    console.error(error)
+    return res.status(400).json({message: "Error al buscar la actividad, inténtelo de nuevo.", error: error.message});
   }
 };
 
@@ -35,7 +36,7 @@ const getActivitiesByTitle = async (req, res, next) => {
 
     return res.status(200).json(activities);
   } catch (error) {
-    return res.status(400).json("Error de búsqueda, inténtelo de nuevo.");
+    return res.status(400).json({message: "Error de búsqueda, inténtelo de nuevo.", error: error.message});
   }
 };
 
@@ -54,7 +55,7 @@ const postActivity = async (req, res, next) => {
       if (req.file) {
       deleteFile(req.file.path);
     }
-    return res.status(400).json("Error al publicar la nueva actividad, inténtelo de nuevo.");
+    return res.status(400).json({message: "Error al publicar la nueva actividad, inténtelo de nuevo.", error: error.message});
   }
 };
 
@@ -82,7 +83,7 @@ const putActivity = async (req, res, next) => {
       if (req.file) {
       deleteFile(req.file.path);
     }
-    return res.status(400).json("Error actualizando la actividad, inténtelo de nuevo.");
+    return res.status(400).json({message: "Error actualizando la actividad, inténtelo de nuevo.", error: error.message});
   }
 };
 
@@ -97,7 +98,7 @@ const deleteActivity = async (req, res, next) => {
 
     return res.status(200).json(activityDeleted);
   } catch (error) {
-    return res.status(400).json("Error eliminando la actividad, inténtelo de nuevo.");
+    return res.status(400).json({message: "Error eliminando la actividad, inténtelo de nuevo.", error: error.message});
   }
 };
 
@@ -117,7 +118,7 @@ const joinActivity = async (req, res, next) => {
 
     return res.status(200).json(updatedActivity);
   } catch (error) {
-    return res.status(400).json("Error al apuntarse a la actividad");
+    return res.status(400).json({message: "Error al apuntarse a la actividad", error: error.message});
   }
 };
 
@@ -133,7 +134,7 @@ const leaveActivity = async (req, res, next) => {
 
     return res.status(200).json(updatedActivity);
   } catch (error) {
-    return res.status(400).json("Error al desapuntarse de la actividad");
+    return res.status(400).json({message: "Error al desapuntarse de la actividad", error: error.message});
   }
 };
 
